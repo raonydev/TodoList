@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="authView" class="screen active">
+      <div class="auth-shell">
+        <div class="brand-panel">
+          <div class="logo-badge">✓</div>
+          <h1>TodoList Pro</h1>
+          <p>Organize sua rotina, seus compromissos e suas prioridades com clareza.</p>
+          <ul>
+            <li>Checklist por dia</li>
+            <li>Agenda semanal</li>
+            <li>Login seguro e recuperação de senha</li>
+          </ul>
+        </div>
+
+        <div class="auth-card">
+          <div class="tab-switcher">
+            <button class="tab-button active" data-tab="login">Entrar</button>
+            <button class="tab-button" data-tab="register">Criar conta</button>
+            <button class="tab-button" data-tab="recover">Recuperar senha</button>
+          </div>
+
+          <form id="loginForm" class="auth-form active">
+            <h2>Bem-vindo de volta</h2>
+            <label>
+              E-mail
+              <input type="email" id="loginEmail" placeholder="seu@email.com" required />
+            </label>
+            <label>
+              Senha
+              <input type="password" id="loginPassword" placeholder="••••••••" required />
+            </label>
+            <button type="submit" class="primary-btn">Entrar</button>
+          </form>
+
+          <form id="registerForm" class="auth-form">
+            <h2>Crie sua conta</h2>
+            <label>
+              Nome completo
+              <input type="text" id="registerName" placeholder="Seu nome" required />
+            </label>
+            <label>
+              E-mail
+              <input type="email" id="registerEmail" placeholder="seu@email.com" required />
+            </label>
+            <label>
+              Senha
+              <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" minlength="6" required />
+            </label>
+            <label>
+              Pergunta de recuperação
+              <select id="registerQuestion">
+                <option value="Qual é o nome do seu primeiro animal de estimação?">Qual é o nome do seu primeiro animal de estimação?</option>
+                <option value="Qual foi o nome da sua primeira escola?">Qual foi o nome da sua primeira escola?</option>
+                <option value="Em que cidade você nasceu?">Em que cidade você nasceu?</option>
+                <option value="Qual é o nome da sua mãe?">Qual é o nome da sua mãe?</option>
+              </select>
+            </label>
+            <label>
+              Resposta secreta
+              <input type="text" id="registerAnswer" placeholder="Sua resposta" required />
+            </label>
+            <button type="submit" class="primary-btn">Cadastrar</button>
+          </form>
+
+          <form id="recoverForm" class="auth-form">
+            <h2>Recuperar senha</h2>
+            <label>
+              E-mail
+              <input type="email" id="recoverEmail" placeholder="seu@email.com" required />
+            </label>
+            <label>
+              Pergunta secreta
+              <select id="recoverQuestion">
+                <option value="Qual é o nome do seu primeiro animal de estimação?">Qual é o nome do seu primeiro animal de estimação?</option>
+                <option value="Qual foi o nome da sua primeira escola?">Qual foi o nome da sua primeira escola?</option>
+                <option value="Em que cidade você nasceu?">Em que cidade você nasceu?</option>
+                <option value="Qual é o nome da sua mãe?">Qual é o nome da sua mãe?</option>
+              </select>
+            </label>
+            <label>
+              Resposta
+              <input type="text" id="recoverAnswer" placeholder="Sua resposta" required />
+            </label>
+            <label>
+              Nova senha
+              <input type="password" id="newPassword" placeholder="Digite sua nova senha" minlength="6" required />
+            </label>
+            <button type="submit" class="primary-btn">Atualizar senha</button>
+          </form>
+
+          <div id="authMessage" class="auth-message" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="appView" class="screen">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Painel pessoal</p>
+          <h2>Minha agenda</h2>
+        </div>
+        <div class="user-box">
+          <div class="avatar" id="headerAvatar">U</div>
+          <div>
+            <strong id="userName">Usuário</strong>
+            <small id="userEmail">user@example.com</small>
+          </div>
+          <button id="logoutBtn" class="secondary-btn">Sair</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <aside class="panel left-panel">
+          <section class="card">
+            <div class="section-title">
+              <h3>Nova tarefa</h3>
+            </div>
+            <form id="taskForm">
+              <label>
+                Título
+                <input type="text" id="taskTitle" placeholder="Ex: Revisar proposta" required />
+              </label>
+              <label>
+                Descrição
+                <textarea id="taskDescription" rows="3" placeholder="Detalhes da tarefa"></textarea>
+              </label>
+              <div class="double-field">
+                <label>
+                  Data
+                  <input type="date" id="taskDate" required />
+                </label>
+                <label>
+                  Prioridade
+                  <select id="taskPriority">
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média" selected>Média</option>
+                    <option value="Alta">Alta</option>
+                  </select>
+                </label>
+              </div>
+              <button type="submit" class="primary-btn">Adicionar tarefa</button>
+            </form>
+          </section>
+
+          <section class="card stats-card">
+            <div class="section-title">
+              <h3>Resumo</h3>
+            </div>
+            <div class="stats-grid">
+              <div>
+                <span>Total</span>
+                <strong id="statTotal">0</strong>
+              </div>
+              <div>
+                <span>Concluídas</span>
+                <strong id="statDone">0</strong>
+              </div>
+              <div>
+                <span>Pendentes</span>
+                <strong id="statPending">0</strong>
+              </div>
+              <div>
+                <span>Hoje</span>
+                <strong id="statToday">0</strong>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="panel main-panel">
+          <div class="card calendar-card">
+            <div class="section-title">
+              <h3>Agenda</h3>
+              <div class="calendar-nav">
+                <button id="prevMonth" class="mini-btn" type="button">‹</button>
+                <span id="monthLabel">Mês</span>
+                <button id="nextMonth" class="mini-btn" type="button">›</button>
+              </div>
+            </div>
+            <div id="calendar" class="calendar"></div>
+          </div>
+
+          <div class="card tasks-card">
+            <div class="section-title">
+              <h3 id="taskListTitle">Tarefas</h3>
+              <select id="filterStatus">
+                <option value="all">Todas</option>
+                <option value="pending">Pendentes</option>
+                <option value="done">Concluídas</option>
+              </select>
+            </div>
+            <div id="taskList" class="task-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
